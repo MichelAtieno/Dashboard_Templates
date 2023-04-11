@@ -1,14 +1,32 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
-import Navbar from "./Navbar";
 import Analytics from "./Analytics";
-import FAQ from "./FAQ";
 import Earnings from "./Earnings";
-import Transfers from "./Transfers";
+import FAQ from "./FAQ";
+import Navbar from "./Navbar";
 import Profile from "./Profile";
-
-
-function Dashboard() {
+import Transfers from "./Transfers";
+import scrollreveal from "scrollreveal";
+export default function Dashboard() {
+  useEffect(() => {
+    const sr = scrollreveal({
+      origin: "bottom",
+      distance: "80px",
+      duration: 2000,
+      reset: false,
+    });
+    sr.reveal(
+      `
+        nav,
+        .row__one,
+        .row__two
+    `,
+      {
+        opacity: 0,
+        interval: 100,
+      }
+    );
+  }, []);
   return (
     <Section>
       <Navbar />
@@ -22,12 +40,10 @@ function Dashboard() {
           <Transfers />
           <Profile />
         </div>
-
       </div>
     </Section>
-  )
+  );
 }
-
 
 const Section = styled.section`
   margin-left: 18vw;
@@ -61,6 +77,4 @@ const Section = styled.section`
       }
     }
   }
-  `;
-
-export default Dashboard;
+`;
